@@ -6,14 +6,15 @@ def menu():
     print("2. Dolgozó törlése")
     print("3. Dolgozó adatainak módosítása")
     print("4. Összes fizetés kiszámítása")
-    print("5. Véletlenszerű 'legmagasabb fizetésű' dolgozó")
-    print("6. Véletlenszerű 'legalacsonyabb fizetésű' dolgozó")
-    print("7. Dolgozók listázása (fizetés szerint rendezve)")
+    print("5. A 'legmagasabb fizetésű' dolgozó")
+    print("6. A 'legalacsonyabb fizetésű' dolgozó")
+    print("7. A 'véletlenszerű fizetésű' dolgozó")
+    print("8. Dolgozók listázása (fizetés szerint rendezve)")
     print("0. Kilépés")
 
 def main():
-    dolgozok = adatokat_betolt()
-
+    dolgozok = adatokat_betolt() #meghívja az adatokat_betolt() függvényt, majd eltárolja az eredményét a dolgozok nevű változóban
+    #megpróbálja megnyitni a dolgozok.json fájlt, beolvassa belőle az adatokat, Dolgozo objektumokat hoz létre, egy listát ad vissza
 
     fut = True
     while fut:
@@ -40,7 +41,7 @@ def main():
         elif valaszt == "5":
             d = legmagasabb_fizetes(dolgozok)
             if d:
-                print("Legmagasabb fizetésű (véletlenszerű):", d.nev, d.fizetes, "Ft")
+                print("Legmagasabb fizetésű:", d.nev, d.fizetes, "Ft")
             else:
                 print("Nincs adat!")
 
@@ -48,12 +49,18 @@ def main():
         elif valaszt == "6":
             d = legalacsonyabb_fizetes(dolgozok)
             if d:
-                print("Legalacsonyabb fizetésű (véletlenszerű):", d.nev, d.fizetes, "Ft")
+                print("Legalacsonyabb fizetésű:", d.nev, d.fizetes, "Ft")
             else:
                 print("Nincs adat!")
 
-
         elif valaszt == "7":
+            d = veletlenszeru_fizetes(dolgozok)
+            if d:
+                print("Véletlenszerű fizetésű:", d.nev, d.fizetes, "Ft")
+            else:
+                print("Nincs adat!")
+
+        elif valaszt == "8":
             lista = rendezes_fizetes_szerint(dolgozok)
             for d in lista:
                 print(d.nev, "-", d.fizetes, "Ft")
@@ -73,5 +80,5 @@ def main():
 
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": #Ez a fájl az indító program, egy feltétel, ami azt vizsgálja: Ez a fájl közvetlenül van futtatva?
     main()
